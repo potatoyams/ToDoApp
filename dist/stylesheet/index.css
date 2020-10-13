@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    background-color: #133b5c;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 8vh;
+    background-color: #1d2d50;
+}
+
+#logo {
+    color: white;
+    letter-spacing: 0.5vh;
+    font-size: 2.75vh;
+}
+
+#nav-container1 {
+    display: flex;
+    justify-content: start;
+    
+    flex: 1;
+} 
+
+#nav-container2 {
+    text-align: center;
+    flex: 2;
+}
+
+#nav-container3 {
+    flex: 1;
+}
+
+#add-btn {
+    cursor: pointer;
+    margin-left: 10vh;
+    height: 4.1vh;
+}

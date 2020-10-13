@@ -27,7 +27,6 @@ nav {
 #nav-container1 {
     display: flex;
     justify-content: start;
-    
     flex: 1;
 } 
 
@@ -44,4 +43,38 @@ nav {
     cursor: pointer;
     margin-left: 10vh;
     height: 4.1vh;
+}
+
+#project-content {
+    display: flex;
+    min-height: 100vh;
+}
+
+#project-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: center;
+    flex: 1;
+}
+
+ul {
+    list-style: square; list-style-position: inside
+}
+
+.project-item {
+    text-align: center;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.2vh;
+}
+
+#project-detail {
+    flex: 4;
+}
+
+#project-list, #project-detail {
+    border-color: white;
+    border-style: solid;
+    border-width: 0.2vh;
 }

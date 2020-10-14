@@ -10,24 +10,40 @@
 <body>
     <nav>
         <div id="nav-container1">
-            <img id="add-btn" src="./icons/add_task-white-48dp.svg">
+            <div id="line1"></div>
+            <div id="line2"></div>
+            <div id="line3"></div>
         </div>
         <div id="nav-container2">
             <h1 id="logo">TODO</h1>
         </div>
         <div id="nav-container3">
+            <img id="add-btn" src="./icons/add_task-white-48dp.svg" alt="Add Task">
         </div>
     </nav>
     <main>
         <div id="project-content">
             <ul id="project-list">
+                <h2 id="project-label">Projects</h2>
+                <hr style="width: 80%;">
                 <li class="project-item">FUCK</li>
                 <li class="project-item">FUCK</li>
                 <li class="project-item">FUCK</li>
                 <li class="project-item">FUCK</li>
                 <li class="project-item">FUCK</li>
             </ul>
-            <div id="project-detail"></div>
+            <div id="project-detail">
+                <form id="editForm" name="editForm" action="onSave();return false;">
+                    <input id="project-title" type="text" autocomplete="off">
+                    <div id="duedatecontainer">
+                        <label id="duedatelabel" for="duedatetime">Due Date:</label>
+                        <input id="duedatetime" name="duedatetime" type="datetime-local">
+                    </div>
+                    <div contenteditable>
+                        type here...
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
     <div id="FUICK">

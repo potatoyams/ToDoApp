@@ -13,3 +13,28 @@ function Project() {
         taskList.append(Task);        
     }
 }
+
+function projectListBtn() {
+    const burgerBtn = document.querySelector("#nav-container1")
+    burgerBtn.addEventListener("click", () => {
+        const projectList = document.querySelector("#project-list");
+        if (projectList.style.display) {
+            if (projectList.style.display === 'flex') {
+                projectList.style.display = 'none';
+            } else {
+                projectList.style.display = 'flex';
+            }
+        } else {
+            projectList.style.display = 'none';
+        }
+    })
+}
+
+function app() {
+    const s = document.querySelector("#project-title")
+    s.value = "FUCK"
+    s.addEventListener("change", () => {console.log("FUCK")});
+    projectListBtn();
+}
+
+app();

@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #133b5c;
+    background-color: #424242;
 }
 
 nav {
@@ -15,18 +15,18 @@ nav {
     justify-content: space-around;
     align-items: center;
     height: 8vh;
-    background-color: #1d2d50;
+    background-color: #212121;
 }
 
 #logo {
     color: white;
     letter-spacing: 0.5vh;
     font-size: 2.75vh;
+    font-weight: 400;
 }
 
 #nav-container1 {
-    display: flex;
-    justify-content: start;
+    cursor: pointer;
     flex: 1;
 } 
 
@@ -36,14 +36,17 @@ nav {
 }
 
 #nav-container3 {
+    display: flex;
+    justify-content: flex-end;
     flex: 1;
 }
 
 #add-btn {
     cursor: pointer;
-    margin-left: 10vh;
+    margin-right: 10vh;
     height: 4.1vh;
 }
+
 
 #project-content {
     display: flex;
@@ -54,7 +57,8 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-content: center;
+    align-items: center;
+    background-color:#303030;
     flex: 1;
 }
 
@@ -63,18 +67,87 @@ ul {
 }
 
 .project-item {
-    text-align: center;
-    border-color: white;
-    border-style: solid;
-    border-width: 0.2vh;
+    list-style: none;
+    padding: 10px;
+}
+
+#project-label {
+    font-weight: 400;
+    color: white;
 }
 
 #project-detail {
     flex: 4;
 }
 
-#project-list, #project-detail {
-    border-color: white;
-    border-style: solid;
-    border-width: 0.2vh;
+#line1, #line2, #line3 {
+    width: 30px;
+    height: 5px;
+    margin: 5px;
+    margin-left: 10vh;
+    background-color: white;
+}
+
+#editForm {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    margin-top: 2vh;
+
+}
+
+input[type=datetime-local], #duedatelabel {
+    color: white;
+    background-color: transparent;
+    border: transparent;
+    font-size: 2vh;
+    margin: 1vh;
+}
+
+.label {
+    color: white;
+    background-color: transparent;
+    border: transparent;
+    font-size: 2vh;
+    margin: 1vh;
+}
+
+
+::-webkit-calendar-picker-indicator {
+    background-image: url('../icons/date_range-white-48dp.svg');
+    background-repeat: no-repeat;
+}
+
+
+
+#project-title {
+    color: white;
+    text-align: center;
+    font-size: 5vh;
+    border: none;
+    background-color: transparent;
+}
+
+#project-title:focus {
+    outline: none;
+    border-bottom: 2px solid white;
+}
+
+#duedatecontainer {
+    display: flex;
+    justify-content: center;
+}
+
+#description {
+    background-color: transparent;
+    font-size: 2vh;
+    color: white;
+    border: none;
+}
+
+div[contenteditable]{
+    border: 1px solid black;
+    font-size: 20px;
+    overflow: auto;
 }

@@ -25,15 +25,22 @@ function projectListBtn() {
                 projectList.style.display = 'flex';
             }
         } else {
-            projectList.style.display = 'none';
+            projectList.style.display = 'flex';
         }
     })
 }
 
 function app() {
-    const s = document.querySelector("#project-title")
-    s.value = "FUCK"
-    s.addEventListener("change", () => {console.log("FUCK")});
+    //const s = document.querySelector("#descriptionBox");
+    //console.log(s);
+    //s.addEventListener("keydown", () => {console.log("FUCK")});
+    /*
+    const s = document.querySelector(".fuck");
+    s.addEventListener("click", () => {
+        console.log("FUCK");
+        s.classList.toggle("toggleCheckList");
+    }) 
+    */
     projectListBtn();
 }
 

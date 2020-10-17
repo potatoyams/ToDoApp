@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-
 }
 
 body {
@@ -18,6 +17,11 @@ nav {
     background-color: #212121;
 }
 
+textarea {
+    background-color: transparent;
+    color: white;
+}
+
 #logo {
     color: white;
     letter-spacing: 0.5vh;
@@ -28,7 +32,7 @@ nav {
 #nav-container1 {
     cursor: pointer;
     flex: 1;
-} 
+}
 
 #nav-container2 {
     text-align: center;
@@ -47,23 +51,35 @@ nav {
     height: 4.1vh;
 }
 
-
 #project-content {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
 #project-list {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    background-color:#303030;
+    background-color: #303030;
+    width: 100%;
+    max-height: 30vh;
     flex: 1;
+    overflow-y: scroll;
+}
+
+#project-list li {
+    color: white;
+}
+
+#project-list li:hover {
+    text-decoration: underline;
 }
 
 ul {
-    list-style: square; list-style-position: inside
+    list-style: square;
+    list-style-position: inside
 }
 
 .project-item {
@@ -94,10 +110,9 @@ ul {
     width: 90%;
     margin: auto;
     margin-top: 2vh;
-
 }
 
-input[type=datetime-local], #duedatelabel {
+.duedatestyle {
     color: white;
     background-color: transparent;
     border: transparent;
@@ -113,13 +128,14 @@ input[type=datetime-local], #duedatelabel {
     margin: 1vh;
 }
 
+.toggleCheckList {
+    text-decoration: line-through;
+}
 
 ::-webkit-calendar-picker-indicator {
     background-image: url('../icons/date_range-white-48dp.svg');
     background-repeat: no-repeat;
 }
-
-
 
 #project-title {
     color: white;
@@ -139,15 +155,62 @@ input[type=datetime-local], #duedatelabel {
     justify-content: center;
 }
 
-#description {
+.sectiondescription {
     background-color: transparent;
     font-size: 2vh;
     color: white;
     border: none;
 }
 
-div[contenteditable]{
-    border: 1px solid black;
+div[contenteditable] {
     font-size: 20px;
     overflow: auto;
+    color: white;
+}
+
+#descriptioncontainer textarea {
+    font-size: 2vh;
+    resize: none;
+    width: 100%;
+}
+
+ul {
+    list-style: circle;
+    list-style-position: inside;
+
+}
+
+#checklistadd {
+    color: white;
+    font-size: 2vh;
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    margin-top: 2vh;
+    width: 100%;
+}
+
+.checklistitem {
+    color: white;
+    font-size: 2vh;
+    width: 90%; 
+    overflow-wrap: break-word;
+}
+
+.checklistcontainer {
+    align-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.checklisticons {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+}
+
+.checklisticon {
+    cursor: pointer;
+    height: 3vh;
+    margin: 2vh;
 }

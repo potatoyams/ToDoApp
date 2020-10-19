@@ -1,17 +1,13 @@
-function Task(title, description, dueDate, priority, notes, checkList) {
+import addNewForm from "./newproject";
+import addProjectForm from "./displayproject"
+
+const projectList = [];
+
+function Task(title, description, dueDate, checkList) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
-    this.priority = priority;
-    this.notes = notes;
     this.checkList = checkList;
-}
-
-function Project() {
-    this.taskList = [];
-    function addTask(Task) {
-        taskList.append(Task);        
-    }
 }
 
 function projectListBtn() {
@@ -30,18 +26,49 @@ function projectListBtn() {
     })
 }
 
+function addNewProjectBtn() {
+     const newProjectBtn = document.querySelector("#add-btn");
+     newProjectBtn.addEventListener("click", () => {
+         const projectContent = document.querySelector("#project-detail");
+         while (projectContent.firstChild) {
+             projectContent.removeChild(projectContent.firstChild);
+         }
+         const projectListContainer = document.querySelector("#project-list-container");
+         const projectIndex = projectListContainer.childElementCount;
+
+         const newProject = document.createElement("li");
+         newProject.textContent = "New Project";
+         newProject.classList.add("project-item");
+         newProject.dataset.index = projectIndex;
+         projectListContainer.appendChild(newProject);
+
+         const newTask = new Task("", "", "",["fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck", "my", 'life']);
+         projectList.push(newTask);
+         addProjectForm(newTask);
+         addNewForm(projectIndex);
+     })
+}
+
+function addFormEventListener() {
+    const currentTask = projectList[document.querySelector("form").dataset.index];
+    const projectTitle = document.querySelector("#project-title");
+    const duedate = document.querySelector("#duedatecontent");
+    const description = document.querySelector("#descriptioncontent");
+    const checklist = document.querySelector("#checklistadd");
+}
+
+function updateFrontPage() {
+    if (projectList.length === 0) {
+        addNewForm(0);
+        addFormEventListener();
+    }
+}
+
 function app() {
-    //const s = document.querySelector("#descriptionBox");
-    //console.log(s);
-    //s.addEventListener("keydown", () => {console.log("FUCK")});
-    /*
-    const s = document.querySelector(".fuck");
-    s.addEventListener("click", () => {
-        console.log("FUCK");
-        s.classList.toggle("toggleCheckList");
-    }) 
-    */
+    updateFrontPage();
     projectListBtn();
+    addNewProjectBtn();
+    addFormEventListener();
 }
 
 app();

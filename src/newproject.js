@@ -29,8 +29,7 @@
 */
 
 function addNewForm(projectIndex) {
-
-
+    
     const projectContent = document.querySelector("#project-detail");
 
     const newForm = document.createElement("form");
@@ -42,6 +41,7 @@ function addNewForm(projectIndex) {
     projectTitle.id= "project-title";
     projectTitle.type = "text";
     projectTitle.autocomplete = "off";
+    projectTitle.required = true;
 
     const duedatecontainer = document.createElement("div");
     duedatecontainer.id = "duedatecontainer";
@@ -71,6 +71,7 @@ function addNewForm(projectIndex) {
     const checklistDescription = document.createElement("h2");
     checklistDescription.classList.add("sectiondescription");
     const checklist = document.createElement("ul");
+    checklist.id = "checkul"
     const checklistcontainer = document.createElement("div");
     checklistcontainer.classList.add("checklistcontainer");
     const addCheckList = document.createElement("input");

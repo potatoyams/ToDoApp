@@ -32,7 +32,6 @@ function addProjectForm(Task) {
     const projectContent = document.querySelector("#project-detail");
 
     const newForm = document.createElement("form");
-    //newForm.dataset.index = projectIndex;
     newForm.id = "editForm"
 
     const projectTitle = document.createElement("input");
@@ -70,6 +69,7 @@ function addProjectForm(Task) {
     const checklistDescription = document.createElement("h2");
     checklistDescription.classList.add("sectiondescription");
     const checklist = document.createElement("ul");
+    checklist.id = "checkul";
     const checklistcontainer = document.createElement("div");
     checklistcontainer.classList.add("checklistcontainer");
     const addCheckList = document.createElement("input");
@@ -77,16 +77,6 @@ function addProjectForm(Task) {
     addCheckList.type = "text";
     addCheckList.autocomplete = "off";
     addCheckList.placeholder = "Type in Task... (Press Enter To Add Task)"
-
-    /*
-    <div class="checklistcontainer">
-                                <li class="checklistitem">fsdfalkjdsklf;dklasdfsadfsdafsdafsadfsadfsadfsadfsdafdsafsadfsadfsadfsadklasdfsadfsdafsdafsadfsadfsadfsadfsdafdsafsadfsadfsadfsadklasdfsadfsdafsdafsadfsadfsadfsadfsdafdsafsadfsadfsadfsadfdsdafsadf;djsfkl;;djsfkl;ads</li>
-                                <div class="checklisticons">
-                                    <img class="checklisticon" src="./icons/done_outline-white-48dp.svg" alt="Add Task">
-                                    <img class="checklisticon" src="./icons/delete-white-48dp.svg" alt="Add Task">
-                                </div>
-                            </div>¸˛
-    */
 
     const taskList = Task.checkList;
     for (const currTask of taskList) {

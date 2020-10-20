@@ -80,23 +80,23 @@ function deleteProjectContent() {
 
 function addFormEventListener() {
     const currIndex = document.querySelector("form").dataset.index;
-    const currentTask = projectList[currIndex];
+    const currentProject = projectList[currIndex];
     const projectTitle = document.querySelector("#project-title");
 
     projectTitle.addEventListener("keyup", (event) => {
-        currentTask.updateTitle(projectTitle.value)
+        currentProject.updateTitle(projectTitle.value)
         const currProject = document.querySelector("[data-index=" + "\'" + currIndex + "\'" + "]")
         currProject.textContent = projectTitle.value;
     });
 
     const duedate = document.querySelector("#duedatecontent");
     duedate.addEventListener("change", () => {
-        currentTask.updateDueDate(duedate.value)
+        currentProject.updateDueDate(duedate.value)
     });
 
     const description = document.querySelector("#descriptioncontent");
     description.addEventListener("keyup", (event) => {
-        currentTask.updateDescription(description.value)
+        currentProject.updateDescription(description.value)
     });
 
     const checklist = document.querySelector("#checklistadd");
@@ -126,6 +126,12 @@ function addFormEventListener() {
             const trashIcon = document.createElement("img");
             trashIcon.classList.add("checklisticon");
             trashIcon.src = "./icons/delete-white-48dp.svg";
+            trashIcon.addEventListener("click", () => {
+                const currTaskContainer = trashIcon.parentNode.parentNode;
+                var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer) - 1;
+                currentProject.checkList.splice(index, 1);
+                checklistul.removeChild(currTaskContainer);
+            })
 
             taskIcons.appendChild(doneIcon);
             taskIcons.appendChild(trashIcon);
@@ -135,7 +141,7 @@ function addFormEventListener() {
             checklist.appendChild(currTaskContainer);
 
             checklistul.appendChild(currTaskContainer);
-            currentTask.addToCheckList(newCheckListItem);
+            currentProject.addToCheckList(newCheckListItem);
             checklist.value = "";
             
         }

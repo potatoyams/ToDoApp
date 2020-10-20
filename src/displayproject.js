@@ -45,8 +45,8 @@ function addProjectForm(index, Project) {
     const checklistdiv = document.createElement("div");
     const checklistDescription = document.createElement("h2");
     checklistDescription.classList.add("sectiondescription");
-    const checklist = document.createElement("ul");
-    checklist.id = "checkul";
+    const checklistul = document.createElement("ul");
+    checklistul.id = "checkul";
     const checklistcontainer = document.createElement("div");
     checklistcontainer.classList.add("checklistcontainer");
     const addCheckList = document.createElement("input");
@@ -74,11 +74,16 @@ function addProjectForm(index, Project) {
             doneIcon.classList.add("checklisticon");
             doneIcon.src = "./icons/done_outline-white-48dp.svg";
             doneIcon.addEventListener("click", () => {
-                console.log("FUCK");
                 currTaskContent.classList.toggle("checklistcomplete");
             });
 
             const trashIcon = document.createElement("img");
+            trashIcon.addEventListener("click", () => {
+                const currTaskContainer = trashIcon.parentNode.parentNode;
+                var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer) - 1;
+                currentProject.checkList.splice(index, 1);
+                checklistul.removeChild(currTaskContainer);
+            })
             trashIcon.classList.add("checklisticon");
             trashIcon.src = "./icons/delete-white-48dp.svg";
 
@@ -87,14 +92,14 @@ function addProjectForm(index, Project) {
 
             currTaskContainer.appendChild(currTaskContent);
             currTaskContainer.appendChild(taskIcons);
-            checklist.appendChild(currTaskContainer);
+            checklistul.appendChild(currTaskContainer);
         }
     }
 
-    checklist.appendChild(checklistcontainer);
+    checklistul.appendChild(checklistcontainer);
     checklistdiv.appendChild(checklistDescription)
     checklistdiv.appendChild(addCheckList);
-    checklistdiv.appendChild(checklist);
+    checklistdiv.appendChild(checklistul);
 
     newForm.appendChild(projectTitle);
     newForm.appendChild(duedatecontainer);

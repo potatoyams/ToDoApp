@@ -1,33 +1,3 @@
-/*
-        <div id="project-detail">
-            <form id="editForm" name="editForm" action="onSave();return false;">
-                    <input id="project-title" type="text" autocomplete="off">
-                    <div id="duedatecontainer">
-                        <label class="duedatestyle" for="duedatetime">Due Date:</label>
-                        <input class="duedatestyle" name="duedatetime" type="datetime-local">
-                    </div>
-                    <div id="descriptioncontainer">
-                        <h2 class="sectiondescription">Description:</h2>
-                        <textarea rows="10"></textarea>
-                    </div>
-                    <div>
-                        <h2 class="sectiondescription">Checklist:</h2>
-                        <ul>
-                            <div class="checklistcontainer">
-                                <li class="checklistitem">fsdfalkjdsklf;dklasdfsadfsdafsdafsadfsadfsadfsadfsdafdsafsadfsadfsadfsadklasdfsadfsdafsdafsadfsadfsadfsadfsdafdsafsadfsadfsadfsadklasdfsadfsdafsdafsadfsadfsadfsadfsdafdsafsadfsadfsadfsadfdsdafsadf;djsfkl;;djsfkl;ads</li>
-                                <div class="checklisticons">
-                                    <img class="checklisticon" src="./icons/done_outline-white-48dp.svg" alt="Add Task">
-                                    <img class="checklisticon" src="./icons/delete-white-48dp.svg" alt="Add Task">
-                                </div>
-                            </div>
-                        </ul>
-                        <input id="checklistadd" type="text" autocomplete="off" placeholder="Type in Task... (Enter To Add Task)">
-                    </div>
-                </form>
-            </div>
-        </div>
-*/
-
 function addNewForm(projectIndex) {
     
     const projectContent = document.querySelector("#project-detail");

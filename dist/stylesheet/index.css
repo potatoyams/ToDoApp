@@ -213,3 +213,12 @@ ul {
     height: 3vh;
     margin: 2vh;
 }
+
+.itemselected {
+    font-weight: bold;
+}
+
+.checklistcomplete {
+    text-decoration: line-through;
+    color: gray;
+}

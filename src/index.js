@@ -1,10 +1,8 @@
-import addNewForm from "./newproject";
 import addProjectForm from "./displayproject"
-import addToProjList from "./newprojectlist"
 
 const projectList = [];
 
-function Task(title, description, dueDate, checkList) {
+function Project(title, description, dueDate, checkList) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -20,6 +18,27 @@ function Task(title, description, dueDate, checkList) {
 
     this.updateDueDate = (newDueDate) => {
         this.dueDate = newDueDate;
+    }
+
+    this.addToCheckList = (checkListItem) => {
+        this.checkList.push(checkListItem);
+    }
+}
+
+function checkListItem(value) {
+    this.value = value;
+    this.finished = false;
+
+    this.invertFinished = () => {
+        this.finished = !(this.finished)
+    }
+
+    this.getValue = () => {
+        return this.value;
+    }
+
+    this.isFinished = () => {
+        return this.finished;
     }
 }
 
@@ -42,21 +61,20 @@ function projectListBtn() {
 function addNewProjectBtn() {
     const newProjectBtn = document.querySelector("#add-btn");
     newProjectBtn.addEventListener("click", () => {
+        const projectIndex = document.querySelector("#project-list-container").childElementCount;
         deleteProjectContent();
-        const newTask = new Task("", "", "", []);
+        const newTask = new Project("New Project", "", "", []);
         projectList.push(newTask);
         addToProjList();
-        addNewForm(projectIndex);
+        addProjectForm(projectIndex);
         addFormEventListener();
     });
 }
 
 function deleteProjectContent() {
-    const projectListContainer = document.querySelector("#project-list-container");
-        const projectIndex = projectListContainer.childElementCount;
-        const projectContent = document.querySelector("#project-detail");
-        while (projectContent.firstChild) {
-            projectContent.removeChild(projectContent.firstChild);
+    const projectContent = document.querySelector("#project-detail");
+    while (projectContent.firstChild) {
+        projectContent.removeChild(projectContent.firstChild);
     }
 }
 
@@ -78,13 +96,13 @@ function addFormEventListener() {
 
     const description = document.querySelector("#descriptioncontent");
     description.addEventListener("keyup", (event) => {
-        currentTask.updateDescription(projectTitle.value)
+        currentTask.updateDescription(description.value)
     });
 
     const checklist = document.querySelector("#checklistadd");
     checklist.addEventListener("keydown", (event) => {
         if (event.keyCode === 13) {
-            console.log("oy");
+            const newCheckListItem = new checkListItem(checklist.value);
             const checklistul = document.querySelector("#checkul");
 
             const currTaskContainer = document.createElement("div");
@@ -100,6 +118,10 @@ function addFormEventListener() {
             const doneIcon = document.createElement("img");
             doneIcon.classList.add("checklisticon");
             doneIcon.src = "./icons/done_outline-white-48dp.svg";
+            doneIcon.addEventListener("click", () => {
+                currTaskContent.classList.toggle("checklistcomplete");
+                newCheckListItem.invertFinished();
+            });
 
             const trashIcon = document.createElement("img");
             trashIcon.classList.add("checklisticon");
@@ -113,18 +135,37 @@ function addFormEventListener() {
             checklist.appendChild(currTaskContainer);
 
             checklistul.appendChild(currTaskContainer);
+            currentTask.addToCheckList(newCheckListItem);
+            checklist.value = "";
+            
         }
     });
 }
 
 function updateFrontPage() {
     if (projectList.length === 0) {
-        const newTask = new Task("New Project", "", "", []);
+        const newTask = new Project("New Project", "", "", []);
         projectList.push(newTask);
         addToProjList();
-        addNewForm(0);
+        addProjectForm(0);
         addFormEventListener();
     }
+}
+
+function addToProjList() {
+    const projectListContainer = document.querySelector("#project-list-container");
+    const projectIndex = projectListContainer.childElementCount;
+
+    const newProject = document.createElement("li");
+    newProject.textContent = "New Project";
+    newProject.classList.add("project-item");
+    newProject.dataset.index = projectIndex;
+    newProject.addEventListener("click", () => {
+        deleteProjectContent();
+        addProjectForm(newProject.dataset.index, projectList[newProject.dataset.index]);
+        addFormEventListener();
+    });
+    projectListContainer.appendChild(newProject);
 }
 
 function app() {

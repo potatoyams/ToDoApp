@@ -47,8 +47,6 @@ function addProjectForm(index, Project) {
     checklistDescription.classList.add("sectiondescription");
     const checklistul = document.createElement("ul");
     checklistul.id = "checkul";
-    const checklistcontainer = document.createElement("div");
-    checklistcontainer.classList.add("checklistcontainer");
     const addCheckList = document.createElement("input");
     addCheckList.id = "checklistadd";
     addCheckList.type = "text";
@@ -75,13 +73,14 @@ function addProjectForm(index, Project) {
             doneIcon.src = "./icons/done_outline-white-48dp.svg";
             doneIcon.addEventListener("click", () => {
                 currTaskContent.classList.toggle("checklistcomplete");
+                currTask.invertFinished();
             });
 
             const trashIcon = document.createElement("img");
             trashIcon.addEventListener("click", () => {
                 const currTaskContainer = trashIcon.parentNode.parentNode;
-                var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer) - 1;
-                currentProject.checkList.splice(index, 1);
+                var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer);
+                Project.checkList.splice(index, 1);
                 checklistul.removeChild(currTaskContainer);
             })
             trashIcon.classList.add("checklisticon");
@@ -96,7 +95,6 @@ function addProjectForm(index, Project) {
         }
     }
 
-    checklistul.appendChild(checklistcontainer);
     checklistdiv.appendChild(checklistDescription)
     checklistdiv.appendChild(addCheckList);
     checklistdiv.appendChild(checklistul);

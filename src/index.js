@@ -128,7 +128,7 @@ function addFormEventListener() {
             trashIcon.src = "./icons/delete-white-48dp.svg";
             trashIcon.addEventListener("click", () => {
                 const currTaskContainer = trashIcon.parentNode.parentNode;
-                var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer) - 1;
+                var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer);
                 currentProject.checkList.splice(index, 1);
                 checklistul.removeChild(currTaskContainer);
             })

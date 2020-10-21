@@ -1,6 +1,6 @@
 import addProjectForm from "./displayproject"
 
-const projectList = [];
+const projectList;
 
 function Project(title, description, dueDate, checkList) {
     this.title = title;
@@ -64,6 +64,7 @@ function addNewProjectBtn() {
         const projectIndex = document.querySelector("#project-list-container").childElementCount;
         deleteProjectContent();
         const newTask = new Project("New Project", "", "", []);
+        // TODO: Add to ProjectList
         projectList.push(newTask);
         addToProjList();
         addProjectForm(projectIndex);
@@ -143,12 +144,13 @@ function addFormEventListener() {
             checklistul.appendChild(currTaskContainer);
             currentProject.addToCheckList(newCheckListItem);
             checklist.value = "";
-            
+
         }
     });
 }
 
 function updateFrontPage() {
+    projectList = cacheUp();
     if (projectList.length === 0) {
         const newTask = new Project("New Project", "", "", []);
         projectList.push(newTask);
@@ -178,6 +180,13 @@ function app() {
     updateFrontPage();
     projectListBtn();
     addNewProjectBtn();
+}
+
+function cacheUp() {
+    if (!localStorage.getItem('projectList')) {
+        localStorage['projectList'] = JSON.stringify([]);
+    }
+    return JSON.parse(localStorage.getItem('projectList'));
 }
 
 app();

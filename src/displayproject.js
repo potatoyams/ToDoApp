@@ -1,3 +1,5 @@
+import updateCache from "./index"
+
 function addProjectForm(index, Project) {
     console.log("HELELAJSDFL:ASF");
     const projectContent = document.querySelector("#project-detail");
@@ -26,6 +28,9 @@ function addProjectForm(index, Project) {
     duedatecontent.id = "duedatecontent"
     duedatecontent.name = "duedatetime";
     duedatecontent.type = "datetime-local";
+    if (Project) {
+        duedatecontent.value = Project.dueDate;
+    }
     duedatecontainer.appendChild(duedatelabel);
     duedatecontainer.appendChild(duedatecontent);
 
@@ -75,6 +80,7 @@ function addProjectForm(index, Project) {
             doneIcon.addEventListener("click", () => {
                 currTaskContent.classList.toggle("checklistcomplete");
                 currTask.invertFinished();
+                updateCache();
             });
 
             const trashIcon = document.createElement("img");
@@ -83,7 +89,8 @@ function addProjectForm(index, Project) {
                 var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer);
                 Project.checkList.splice(index, 1);
                 checklistul.removeChild(currTaskContainer);
-            })
+                updateCache();
+            });
             trashIcon.classList.add("checklisticon");
             trashIcon.src = "./icons/delete-white-48dp.svg";
 

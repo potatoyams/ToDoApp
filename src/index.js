@@ -42,7 +42,7 @@ function CheckListItem(value, finished = false) {
     }
 }
 
-function projectListBtn() {
+function burgerBtn() {
     const burgerBtn = document.querySelector("#nav-container1")
     burgerBtn.addEventListener("click", () => {
         const projectList = document.querySelector("#project-list");
@@ -135,6 +135,7 @@ function addFormEventListener() {
                 const currTaskContainer = trashIcon.parentNode.parentNode;
                 var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer);
                 currentProject.checkList.splice(index, 1);
+                console.log(projectList);
                 updateCache();
                 checklistul.removeChild(currTaskContainer);
             })
@@ -155,6 +156,10 @@ function addFormEventListener() {
     });
 }
 
+function updateCheckListEvent() {
+
+}
+
 function updateFrontPage() {
     projectList = cacheUp();
     if (projectList.length === 0) {
@@ -162,9 +167,28 @@ function updateFrontPage() {
         projectList.push(newTask);
         addToProjList();
         updateCache();
+    } else {
+        updateBurger();
     }
     addProjectForm(0, projectList[0]);
     addFormEventListener();
+}
+
+function updateBurger() {
+    const projectListContainer = document.querySelector("#project-list-container");
+    for (const currProjectIndex in projectList) {
+        const currProject = projectList[currProjectIndex];
+        const newProject = document.createElement("li");
+        newProject.textContent = currProject.title;
+        newProject.classList.add("project-item");
+        newProject.dataset.index = currProjectIndex;
+        newProject.addEventListener("click", () => {
+            deleteProjectContent();
+            addProjectForm(newProject.dataset.index, projectList[newProject.dataset.index]);
+            addFormEventListener();
+        });
+        projectListContainer.appendChild(newProject);
+    }
 }
 
 function addToProjList() {
@@ -185,7 +209,7 @@ function addToProjList() {
 
 function app() {
     updateFrontPage();
-    projectListBtn();
+    burgerBtn();
     addNewProjectBtn();
 }
 
@@ -209,5 +233,7 @@ function cacheUp() {
 function updateCache() {
     localStorage['projectList'] = JSON.stringify(projectList);
 }
+
+export default updateCache;
 
 app();

@@ -1,4 +1,5 @@
 function addProjectForm(index, Project) {
+    console.log("HELELAJSDFL:ASF");
     const projectContent = document.querySelector("#project-detail");
 
     const newForm = document.createElement("form");

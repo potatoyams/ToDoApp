@@ -1,6 +1,6 @@
 import addProjectForm from "./displayproject"
 
-const projectList;
+var projectList = [];
 
 function Project(title, description, dueDate, checkList) {
     this.title = title;
@@ -25,9 +25,9 @@ function Project(title, description, dueDate, checkList) {
     }
 }
 
-function checkListItem(value) {
+function CheckListItem(value, finished = false) {
     this.value = value;
-    this.finished = false;
+    this.finished = finished;
 
     this.invertFinished = () => {
         this.finished = !(this.finished)
@@ -64,8 +64,8 @@ function addNewProjectBtn() {
         const projectIndex = document.querySelector("#project-list-container").childElementCount;
         deleteProjectContent();
         const newTask = new Project("New Project", "", "", []);
-        // TODO: Add to ProjectList
         projectList.push(newTask);
+        updateCache();
         addToProjList();
         addProjectForm(projectIndex);
         addFormEventListener();
@@ -88,22 +88,25 @@ function addFormEventListener() {
         currentProject.updateTitle(projectTitle.value)
         const currProject = document.querySelector("[data-index=" + "\'" + currIndex + "\'" + "]")
         currProject.textContent = projectTitle.value;
+        updateCache();
     });
 
     const duedate = document.querySelector("#duedatecontent");
     duedate.addEventListener("change", () => {
         currentProject.updateDueDate(duedate.value)
+        updateCache();
     });
 
     const description = document.querySelector("#descriptioncontent");
     description.addEventListener("keyup", (event) => {
         currentProject.updateDescription(description.value)
+        updateCache();
     });
 
     const checklist = document.querySelector("#checklistadd");
     checklist.addEventListener("keydown", (event) => {
         if (event.keyCode === 13) {
-            const newCheckListItem = new checkListItem(checklist.value);
+            const newCheckListItem = new CheckListItem(checklist.value);
             const checklistul = document.querySelector("#checkul");
 
             const currTaskContainer = document.createElement("div");
@@ -122,6 +125,7 @@ function addFormEventListener() {
             doneIcon.addEventListener("click", () => {
                 currTaskContent.classList.toggle("checklistcomplete");
                 newCheckListItem.invertFinished();
+                updateCache();
             });
 
             const trashIcon = document.createElement("img");
@@ -131,6 +135,7 @@ function addFormEventListener() {
                 const currTaskContainer = trashIcon.parentNode.parentNode;
                 var index = Array.prototype.indexOf.call(checklistul.children, currTaskContainer);
                 currentProject.checkList.splice(index, 1);
+                updateCache();
                 checklistul.removeChild(currTaskContainer);
             })
 
@@ -143,6 +148,7 @@ function addFormEventListener() {
 
             checklistul.appendChild(currTaskContainer);
             currentProject.addToCheckList(newCheckListItem);
+            updateCache();
             checklist.value = "";
 
         }
@@ -155,9 +161,10 @@ function updateFrontPage() {
         const newTask = new Project("New Project", "", "", []);
         projectList.push(newTask);
         addToProjList();
-        addProjectForm(0);
-        addFormEventListener();
+        updateCache();
     }
+    addProjectForm(0, projectList[0]);
+    addFormEventListener();
 }
 
 function addToProjList() {
@@ -186,7 +193,21 @@ function cacheUp() {
     if (!localStorage.getItem('projectList')) {
         localStorage['projectList'] = JSON.stringify([]);
     }
-    return JSON.parse(localStorage.getItem('projectList'));
+    var cacheObj = JSON.parse(localStorage.getItem('projectList'));
+    const cachedProjectList = [];
+    for (const currObj of cacheObj) {
+        const currCheckList = currObj['checkList'];
+        const objCheckList = [];
+        for (const currList of currCheckList) {
+            objCheckList.push(new CheckListItem(currList.value, currList.finished));
+        }
+        cachedProjectList.push(new Project(currObj["title"], currObj["description"], currObj["dueDate"], objCheckList));
+    }
+    return cachedProjectList;
+}
+
+function updateCache() {
+    localStorage['projectList'] = JSON.stringify(projectList);
 }
 
 app();

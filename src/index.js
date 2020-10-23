@@ -156,10 +156,6 @@ function addFormEventListener() {
     });
 }
 
-function updateCheckListEvent() {
-
-}
-
 function updateFrontPage() {
     projectList = cacheUp();
     if (projectList.length === 0) {
@@ -211,6 +207,7 @@ function app() {
     updateFrontPage();
     burgerBtn();
     addNewProjectBtn();
+    deleteProjectBtn();
 }
 
 function cacheUp() {
@@ -232,6 +229,42 @@ function cacheUp() {
 
 function updateCache() {
     localStorage['projectList'] = JSON.stringify(projectList);
+}
+
+function deleteProjectBtn() {
+    const deleteBtn = document.querySelector("#delete-project");
+    const modal = document.querySelector("#myModal");
+    deleteBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    const yesBtn = document.querySelector("#yes-btn");
+    yesBtn.addEventListener("click", () => {
+        console.log("EUYEYUE");
+        const currFormIndex = document.querySelector("form").dataset.index;
+        projectList.splice(currFormIndex, 1);
+        updateCache();
+        const projectListContainer = document.querySelector("#project-list-container");
+        while (projectListContainer.firstChild) {
+            console.log(projectListContainer.firstChild);
+            projectListContainer.removeChild(projectListContainer.firstChild);
+        }
+        deleteProjectContent();
+        updateFrontPage();
+        modal.style.display = "none";
+    });
+
+    const noBtn = document.querySelector("#no-btn");
+    noBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    })
+
 }
 
 export default updateCache;
